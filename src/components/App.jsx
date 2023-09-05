@@ -17,15 +17,21 @@ export class App extends Component {
   };
 
   newContact = data => {
+    const contacts = this.state.contacts;
+    const isDublicate = contacts.some(
+      contact => contact.name.toLowerCase() === data.name.toLowerCase()
+    );
+
+    if (isDublicate) {
+      return alert(`${data.name} is already in contacts!`);
+    }
+
     const contact = {
       ...data,
       id: nanoid(),
     };
 
     this.setState(({ contacts }) => {
-      if (contacts.some(contact => contact.name === data.name)) {
-        return alert(`${data.name} is already in contacts!`);
-      }
       return { contacts: [contact, ...contacts] };
     });
   };

@@ -15,7 +15,7 @@ export class ContactForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    this.props.onSubmit({ name: this.state.name, number: this.state.number });
+    this.props.onSubmit({ ...this.state });
     this.reset();
   };
 
